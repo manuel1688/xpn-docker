@@ -9,7 +9,7 @@ services:
     build:
       context: ./
       dockerfile: ./u20-dockerfile
-    image: u20
+    image: expand
     privileged: true
     volumes:
       - type: bind

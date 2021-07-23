@@ -66,7 +66,7 @@ do
 		fi
 
 		echo "Building initial image..."
-		docker image build -t u20 -f u20-dockerfile .
+		docker image build -t expand -f u20-dockerfile .
 	     ;;
 
 	     start)

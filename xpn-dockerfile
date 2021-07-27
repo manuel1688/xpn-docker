@@ -127,7 +127,7 @@ WORKDIR "/work"
 
 # container start-up
 RUN mkdir -p /srv
-COPY u20-dockerstart.sh /srv
+COPY xpn-dockerstart.sh /srv
 
 # NFS configuration
 RUN mkdir -p /nfs && \
@@ -136,5 +136,5 @@ RUN mkdir -p /nfs && \
 
 
 EXPOSE 22
-CMD ["/srv/u20-dockerstart.sh"]
+CMD ["/srv/xpn-dockerstart.sh"]
 

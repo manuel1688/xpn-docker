@@ -1,14 +1,10 @@
-version: "3.5"
-
-networks:
-  b0:
-    driver: bridge
+version: "3.8"
 
 services:
   node:
     build:
       context: ./
-      dockerfile: ./u20-dockerfile
+      dockerfile: ./xpn-dockerfile
     image: expand
     privileged: true
     volumes:
@@ -19,4 +15,10 @@ services:
         source: ./export
         target: /nfs
     networks:
-      - b0
+      - backend
+
+networks:
+  backend:
+    ipam:
+      config:
+        - subnet: 192.168.0.0/16

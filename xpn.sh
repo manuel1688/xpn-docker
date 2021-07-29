@@ -120,6 +120,8 @@ do
 			if [ $# -lt 1 ]; then
 				 NC=1
 			fi
+      
+      shift
 	
 			# Check params
 			if [ -f .xpn_worksession ]; then
@@ -174,7 +176,9 @@ do
 			#CIP=$(head -$1 machines_mpi | tail -1)
 			CNAME=$(docker ps -f name=xpn -q | head -1)
 			NN=$(wc -l machines_mpi  | awk '{print $1}')
-		
+	    
+      shift	
+   
 			# Check parameters
 			if [ ! -f machines_mpi ]; then
 				echo ": The machines_mpi file was not found."

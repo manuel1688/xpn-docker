@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <xpn_conf>
-<partition>
-</partition>
+<partition bsize="64k" name="xpn1" type="NORMAL">
+<data_node id="a94c6b0a211b" url="nfs3://192.168.0.201/nfs/a94c6b0a211b" /></partition>
 </xpn_conf>

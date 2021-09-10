@@ -25,9 +25,10 @@ int main()
 	fd1 = xpn_unlink("/xpn1/jj.txt");
 	printf("xpn_unlink jj = %d\n",fd1);
 	fd1 = xpn_unlink("/xpn1/jj1.txt");
-	printf("xpn_unlink jj = %d\n",fd1);
+	printf("xpn_unlink jj1 = %d\n",fd1);
 	
-	fd1 = xpn_creat("/xpn1/jj.txt",00777);
+
+	fd1 = xpn_creat("/xpn1/jj.txt",0777);
 	printf("xpn_creat jj = %d\n",fd1);
 	
 	fd2 = xpn_creat("/xpn1/jj1.txt",0777);

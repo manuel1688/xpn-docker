@@ -33,21 +33,28 @@ echo "export XPN_CONF=/work/xpn.conf.xml" >> ~/bashrc
 source ~/bashrc
 
 # Start kernel NFS
-mkdir /nfs/$(hostname)
-echo "/nfs/$(hostname) $(hostname -i)/16(rw,sync,no_root_squash,no_subtree_check,fsid=0)" >> /etc/exports
-
-/usr/sbin/service nfs-kernel-server start
-status=$?
-if [ $status -ne 0 ]; then
-     echo "Failed to start nfs: $status"
-     exit $status
-fi
-
-# Start user NFS
 #mkdir /nfs/$(hostname)
 #echo "/nfs/$(hostname) $(hostname -i)/16(rw,sync,no_root_squash,no_subtree_check,fsid=0)" >> /etc/exports
 
-#/usr/sbin/unfsd
+#/usr/sbin/service nfs-kernel-server start
+#status=$?
+#if [ $status -ne 0 ]; then
+#     echo "Failed to start nfs: $status"
+#     exit $status
+#fi
+
+# Start user NFS
+mkdir /nfs/$(hostname)
+#echo "/nfs/$(hostname)/ $(hostname -i)/16(rw,sync,no_root_squash,no_subtree_check,fsid=0)" >> /etc/exports
+
+ip_base="192.168.0."
+
+for i in {1..254}
+do
+  echo "/nfs/$(hostname)/ ${ip_base}${i}(rw,sync,no_root_squash,no_subtree_check,fsid=0)" >> /etc/exports
+done
+
+/usr/sbin/unfsd
 
 # Create xpn.conf
 python3 /work/conf_generator.py $(hostname -i) $(hostname)

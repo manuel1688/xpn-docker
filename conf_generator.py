@@ -20,6 +20,6 @@ with lock:
   # data nodes creation
   ET.SubElement(root[0], 'data_node')
   root[0][length].set('id', sys.argv[2])
-  root[0][length].set('url','nfs3://'+sys.argv[1]+'/nfs/'+sys.argv[2]+'/')
+  root[0][length].set('url','nfs3://'+sys.argv[1]+'/nfs/'+sys.argv[2])
    
   tree.write('/work/xpn.conf.xml')

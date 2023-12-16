@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 
 # A) Install essential software
-COPY scripts/pkg-install/*.sh /tmp
+COPY scripts/pkg-install/*.sh /tmp/
  RUN  chmod a+x /tmp/*.sh
  RUN  /tmp/essential-util.sh
  RUN  /tmp/essential-net.sh
@@ -22,13 +22,13 @@ RUN addgroup --gid $GID lab && \
 RUN echo 'lab:lab' | chpasswd
 
 # C) Install SSH (from package)
-COPY scripts/pkg-install/*.sh /tmp
+COPY scripts/pkg-install/*.sh /tmp/
  RUN  chmod a+x /tmp/*.sh
  RUN  /tmp/ssh.sh
 RUN chown -R lab:lab /home/lab
 
 # D) Install MPICH and XPN (from source)
-COPY scripts/src-install/*.sh /tmp
+COPY scripts/src-install/*.sh /tmp/
  RUN  chmod a+x /tmp/*.sh
  RUN  /tmp/mpich.sh   /home/lab/src/
  RUN  /tmp/xpn.sh     /home/lab/src/
@@ -45,7 +45,7 @@ WORKDIR "/home/lab"
 # Container start-up
 RUN mkdir -p /work
 RUN mkdir -p /srv
-COPY docker/dockerstart.sh /srv
+COPY docker/dockerstart.sh /srv/
 RUN  rm -fr /tmp/*.sh
 
 EXPOSE 22

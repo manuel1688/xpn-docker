@@ -2,9 +2,9 @@
 
 ## Contents
 
- * [Getting xpn-docker](https://github.com/acaldero/lab-docker/#getting-xpn-docker)
- * [Some use cases with lab-docker](https://github.com/acaldero/lab-docker/#examples-of-some-use-cases-with-lab-docker)
- * [Using lab-docker](https://github.com/acaldero/lab-docker/#using-lab-docker)
+ * [Getting xpn-docker](https://github.com/acaldero/xpn-docker/#getting-xpn-docker)
+ * [Some use cases with lab-docker](https://github.com/acaldero/xpn-docker/#examples-of-some-use-cases-with-lab-docker)
+ * [Using lab-docker](https://github.com/acaldero/xpn-docker/#using-lab-docker)
 
 
 ## Getting xpn-docker

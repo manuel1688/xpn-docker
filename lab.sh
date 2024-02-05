@@ -33,25 +33,27 @@ lab_help_b ()
 {
 	echo "  Usage: $0 <action> [<options>]"
 	echo ""
-	echo "  : First time, and each time docker/dockerfile is updated, please execute:"
-	echo "          $0 build"
+	echo "  :: First time + each time docker/dockerfile is updated, please execute:"
+	echo "        $0 build"
 	echo ""
-	echo "  : A typical work session has 3 steps:"
-	echo "    1) First, please start the work session with:"
-	echo "          $0 start <number of containers>"
-	echo "          $0 status"
-	echo "    2) Then you can...:"
-	echo "       2.1) ...work in a single container:"
-	echo "          $0 bash <container id, from 1 to number_of_containers>"
-	echo "          <some work within container>"
-	echo "          exit"
-	echo "       2.1) ...work on all containers:"
-	echo "          $0 mpirun 2 \"<command>\""
-	echo "    3) Lastly, please stop the work session with:"
-	echo "          $0 stop"
+	echo "  :: Working with xpn-docker:"
+	echo "     1) Starting the containers:"
+	echo "        $0 start <number of containers>"
 	echo ""
-	echo "  : Available option to uninstall lab-docker (remove images + containers):"
-	echo "          $0 cleanup"
+	echo "     2) To...:"
+	echo "        2.a) ...work in a single container:"
+	echo "             $0 bash <container id, from 1 to number_of_containers>"
+	echo "             <some work...>"
+	echo "             exit"
+	echo ""
+	echo "        2.b) ...execute \"command\" on all containers:"
+	echo "             $0 mpirun 2 \"<command>\""
+	echo ""
+	echo "     3) Stopping the containers:"
+	echo "        $0 stop"
+	echo ""
+	echo "  :: Available option to uninstall xpn-docker (remove images + containers):"
+	echo "        $0 cleanup"
 	echo ""
 }
 
@@ -62,7 +64,7 @@ lab_help_c ()
 	echo "  :: First time + each time docker/dockerfile is updated, please execute:"
 	echo "        $0 build"
 	echo ""
-	echo "  :: Working with lab-docker:"
+	echo "  :: Working with xpn-docker:"
 	echo "     1) Starting the containers:"
 	echo "        $0 start <number of containers>"
 	echo ""
@@ -76,7 +78,7 @@ lab_help_c ()
 	echo "     3) Stopping the containers:"
 	echo "        $0 stop"
 	echo ""
-	echo "  :: Available option to uninstall lab-docker (remove images + containers):"
+	echo "  :: Available option to uninstall xpn-docker (remove images + containers):"
 	echo "        $0 cleanup"
 	echo ""
 }
@@ -154,7 +156,7 @@ do
 		# Check params
 		if [ ! -f docker/dockerfile ]; then
 		    echo ": The docker/dockerfile file is not found."
-		    echo ": * Did you execute git clone https://github.com/acaldero/lab-docker.git?."
+		    echo ": * Did you execute git clone https://github.com/acaldero/xpn-docker.git?."
 		    echo ""
 		    exit
 		fi
@@ -171,10 +173,10 @@ do
 
 		# Start container cluster (single node)
 		echo "Building containers..."
-		HOST_UID=$(id -u) HOST_GID=1000 docker-compose -f docker/dockercompose.yml up -d --scale node=$1
+		HOST_UID=$(id -u) HOST_GID=1000 docker compose -f docker/dockercompose.yml up -d --scale node=$1
 		if [ $? -gt 0 ]; then
-		    echo ": The docker-compose command failed to spin up containers."
-		    echo ": * Did you execute git clone https://github.com/acaldero/lab-docker.git?."
+		    echo ": The docker compose command failed to spin up containers."
+		    echo ": * Did you execute git clone https://github.com/acaldero/xpn-docker.git?."
 		    echo ""
 		    exit
 		fi
@@ -215,10 +217,10 @@ do
 	     stop)
 		# Stopping containers
 		echo "Stopping containers..."
-		HOST_UID=$(id -u) HOST_GID=1000 docker-compose -f docker/dockercompose.yml down
+		HOST_UID=$(id -u) HOST_GID=1000 docker compose -f docker/dockercompose.yml down
 		if [ $? -gt 0 ]; then
-		    echo ": The docker-compose command failed to stop containers."
-		    echo ": * Did you execute git clone https://github.com/acaldero/lab-docker.git?."
+		    echo ": The docker compose command failed to stop containers."
+		    echo ": * Did you execute git clone https://github.com/acaldero/xpn-docker.git?."
 		    echo ""
 		    exit
 		fi

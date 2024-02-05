@@ -3,7 +3,7 @@
 ## Contents
 
  * [Getting xpn-docker](https://github.com/acaldero/lab-docker/#getting-xpn-docker)
- * [Some use cases with lab-docker](https://github.com/acaldero/lab-docker/#some-use-cases-with-lab-docker)
+ * [Some use cases with lab-docker](https://github.com/acaldero/lab-docker/#examples-of-some-use-cases-with-lab-docker)
  * [Using lab-docker](https://github.com/acaldero/lab-docker/#using-lab-docker)
 
 
@@ -15,7 +15,7 @@ cd xpn-docker
 ./lab.sh build
 ```
 
-## Some use cases with lab-docker
+## Examples of some use cases with lab-docker
 
 <html>
  <table>
@@ -25,13 +25,13 @@ cd xpn-docker
 Example
   </td>
   <td>
-To start <b>3</b> containers:
+(1) To start <b>3</b> containers:
   </td>
   <td>
-Some work from container <b>1</b>:
+(2) To run the example:
   </td>
   <td>
-To stop the containers:
+(3) To stop the containers:
   </td>
   </tr>
 
@@ -39,7 +39,7 @@ To stop the containers:
   <td>
 Expand (native)
   </td>
-  <td rowspan="3">
+  <td>
    <pre>
 ./lab.sh start <b>3</b>
 ./lab.sh status
@@ -53,7 +53,7 @@ source .profile
 exit
    </pre>
   </td>
-  <td rowspan="3">
+  <td>
    <pre>
 ./lab.sh stop
    </pre>
@@ -66,10 +66,21 @@ Expand (bypass)
   </td>
   <td>
    <pre>
+./lab.sh start <b>3</b>
+./lab.sh status
+   </pre>
+  </td>
+  <td>
+   <pre>
 ./lab.sh bash <b>1</b>
 source .profile
 <b>./data/xpn-mpi-bypass.sh</b>
 exit
+   </pre>
+  </td>
+  <td>
+   <pre>
+./lab.sh stop
    </pre>
   </td>
   </tr>
@@ -80,10 +91,21 @@ Expand (fuse)
   </td>
   <td>
    <pre>
+./lab.sh start <b>3</b>
+./lab.sh status
+   </pre>
+  </td>
+  <td>
+   <pre>
 ./lab.sh bash <b>1</b>
 source .profile
 <b>./data/xpn-mpi-fuse.sh</b>
 exit
+   </pre>
+  </td>
+  <td>
+   <pre>
+./lab.sh stop
    </pre>
   </td>
   </tr>
@@ -165,4 +187,5 @@ exit
 * :technologist: Alejandro Calderón Mateos
 * :technologist: Diego Camarmas Alonso (XPN)
 * :technologist: Elias del Pozo Puñal (XPN)
+
 

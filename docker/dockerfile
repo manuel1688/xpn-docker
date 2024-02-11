@@ -32,7 +32,7 @@ COPY scripts/src-install/*.sh /tmp/
  RUN  chmod a+x /tmp/*.sh
  RUN  /tmp/mpich.sh   /home/lab/src/
  RUN  /tmp/xpn.sh     /home/lab/src/
-RUN chown -R lab:lab /home/lab
+#RUN chown -R lab:lab /home/lab
 
 # User initial home
 RUN mkdir -p  /home/lab/bin;  mkdir -p /home/lab/data

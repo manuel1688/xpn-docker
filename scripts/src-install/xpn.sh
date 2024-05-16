@@ -13,7 +13,7 @@ DESTINATION_PATH=$1
 # 3) Download XPN
 mkdir -p ${DESTINATION_PATH}
 cd       ${DESTINATION_PATH}
-git clone https://github.com/xpn-arcos/xpn.git
+git clone https://github.com/manuel1688/xpn.git
 
 # 4) Install XPN (from source code)
 mkdir -p /home/lab/bin
@@ -30,4 +30,11 @@ make -j $(nproc) all
 
 cd ${DESTINATION_PATH}/xpn/
 make install
+
+#Intercept (Manuel)
+cd /home/lab/src/xpn/src/xpn_syscall_intercept
+bash makefile_scripts.sh
+cd /home/lab/src/xpn/test/integrity/test_xpn_syscall
+make
+
 

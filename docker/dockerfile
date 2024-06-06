@@ -4,7 +4,7 @@ FROM ubuntu:${UBUNTU_VERSION} AS base
 ARG UID
 ARG GID
 
-ENV DEBIAN_FRONTEND=noninteractive 
+ENV DEBIAN_FRONTEND=noninteractive
 
 
 # A) Install essential software
@@ -36,10 +36,12 @@ COPY scripts/src-install/*.sh /tmp/
  RUN  /tmp/ior.sh     /home/lab/src/
 
 # User initial home
-RUN mkdir -p  /home/lab/bin;  mkdir -p /home/lab/data
-ADD lab-home/bin   /home/lab/bin
-ADD lab-home/data  /home/lab/data
-RUN chmod a+x /home/lab/bin/*.sh /home/lab/data/*.sh
+RUN mkdir -p  /home/lab/bin  /home/lab/data  /home/lab/replication  /home/lab/spark
+ADD lab-home/bin          /home/lab/bin
+ADD lab-home/data         /home/lab/data
+ADD lab-home/replication  /home/lab/replication
+ADD lab-home/spark        /home/lab/spark
+RUN chmod a+x /home/lab/*/*.sh
 RUN chown -R lab:lab /home/lab
 WORKDIR "/home/lab"
 

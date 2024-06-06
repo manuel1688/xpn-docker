@@ -22,7 +22,6 @@ sleep 3
 # 4) start xpn client
 mpiexec -np 1 \
         -hostfile        /work/machines_mpi \
-        -genv XPN_DNS    /shared/dns.txt  \
         -genv XPN_CONF   /shared/config.txt \
         /home/lab/src/xpn/test/integrity/bypass_c/open-write-close /tmp/fuse/test_1 10
 

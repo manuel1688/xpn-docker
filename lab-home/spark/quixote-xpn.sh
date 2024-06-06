@@ -55,7 +55,7 @@ rm -fr /home/lab/data/2000-wc
 # spark cluster
 /home/lab/spark/sbin/start-all.sh
 sleep 2
-LD_PRELOAD=/home/lab/bin/xpn/lib/xpn_bypass.so:$LD_PRELOAD  spark-submit /home/lab/data/quixote.py  --master "spark://nodo1:7077" --minput "/tmp/expand/xpn/2000-0.txt" --moutput "/tmp/expand/xpn/2000-wc"
+LD_PRELOAD=/home/lab/bin/xpn/lib/xpn_bypass.so:$LD_PRELOAD  spark-submit /home/lab/spark/quixote.py  --master "spark://nodo1:7077" --minput "/tmp/expand/xpn/2000-0.txt" --moutput "/tmp/expand/xpn/2000-wc"
 sleep 2
 /home/lab/spark/sbin/stop-all.sh
 

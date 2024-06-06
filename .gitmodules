@@ -1,0 +1,6 @@
+[submodule "xpn"]
+	path = xpn
+	url = https://github.com/xpn-arcos/xpn.git
+[submodule "ior"]
+	path = ior
+	url = https://github.com/hpc/ior.git

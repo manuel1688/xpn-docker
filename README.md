@@ -32,22 +32,16 @@ Step 3: <br> To stop the containers
 Expand (bypass)
   </td>
   <td>
-   <pre>
-./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status
-   </pre>
+   <code>./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status</code>
   </td>
   <td>
-   <pre>
-./xpn_docker.sh bash <b>1</b>
+   <code>./xpn_docker.sh bash <b>1</b>
 <b>./data/xpn-mpi-bypass.sh</b>
-exit
-   </pre>
+exit</code>
   </td>
   <td>
-   <pre>
-./xpn_docker.sh stop
-   </pre>
+   <code>./xpn_docker.sh stop</code>
   </td>
   </tr>
 
@@ -57,22 +51,16 @@ exit
 Expand (native)
   </td>
   <td>
-   <pre>
-./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status
-   </pre>
+   <code>./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status</code>
   </td>
   <td>
-   <pre>
-./xpn_docker.sh bash <b>1</b>
+   <code>./xpn_docker.sh bash <b>1</b>
 <b>./data/xpn-mpi-native.sh</b>
-exit
-   </pre>
+exit</code>
   </td>
   <td>
-   <pre>
-./xpn_docker.sh stop
-   </pre>
+  <code>./xpn_docker.sh stop</code>
   </td>
   </tr>
   
@@ -82,22 +70,16 @@ exit
 Expand (fuse)
   </td>
   <td>
-   <pre>
-./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status
-   </pre>
+   <code>./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status</code>
   </td>
   <td>
-   <pre>
-./xpn_docker.sh bash <b>1</b>
+   <code>./xpn_docker.sh bash <b>1</b>
 <b>./data/xpn-mpi-fuse.sh</b>
-exit
-   </pre>
+exit</code>
   </td>
   <td>
-   <pre>
-./xpn_docker.sh stop
-   </pre>
+   <code>./xpn_docker.sh stop</code>
   </td>
   </tr>
 
@@ -107,22 +89,16 @@ exit
 Apache Spark
   </td>
   <td>
-   <pre>
-./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status
-   </pre>
+   <code>./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status   </code>
   </td>
   <td>
-   <pre>
-./xpn_docker.sh bash <b>1</b>
-<b>./data/quixote-local.sh</b>
-exit
-   </pre>
+   <code>./xpn_docker.sh bash <b>1</b>
+<b>./spark/quixote-local.sh</b>
+exit</code>
   </td>
   <td>
-   <pre>
-./xpn_docker.sh stop
-   </pre>
+   <code>./xpn_docker.sh stop</code>
   </td>
   </tr>
 
@@ -130,78 +106,82 @@ exit
 </html>
 
 
-## Using lab-docker
+## Using xpn-docker
 
 <html>
  <table>
   <tr>
-  <th>Action</th>
+  <th colspan="2">Action</th>
   <th>Command</th>
   </tr>
 
   <tr>
-  <td> First time + "each time u22-dockerfile is updated"  </td>
-  <td><pre>./xpn_docker.sh build</pre>
+  <td colspan="2"> First time + "each time ./docker/dockerfile is updated"  </td>
+  <td><code>./xpn_docker.sh build</code>
   </td>
   </tr>
 
   <tr>
-  <td> To start a work session with <b>3</b> containers </td>
-  <td><pre>./xpn_docker.sh start <b>3</b></pre>
+  <td rowspan="4">
+  Work session
+  </td>
+  <td colspan="1"> To spin up <b>3</b> containers </td>
+  <td><code>./xpn_docker.sh start <b>3</b></code>
   </td>
   </tr>
 
   <tr>
-  <td> To get into container <b>1</b>  </td>
-  <td><pre> ./xpn_docker.sh bash <b>1</b></pre>
+  <td colspan="1"> To get into container <b>1</b>  </td>
+  <td><code> ./xpn_docker.sh bash <b>1</b></code>
   </td>
   </tr>
 
   <tr>
-  <td> Being in container <b>1</b>, to exit  </td>
-  <td>   <pre>exit</pre>  </td>
+  <td colspan="1"> To exit from container </td>
+  <td><code>exit</code>  </td>
   </tr>
 
   <tr>
-  <td>To stop the work session please use  </td>
-  <td><pre>./xpn_docker.sh stop</pre>
+  <td colspan="1"> To spin down all containers </td>
+  <td><code>./xpn_docker.sh stop</code>
   </td>
   </tr>
 
   <tr>
+  <td rowspan="2">
+  Options for debugging
+  </td>
+  <td>  
+  To check running containers
+  </td>
   <td>
-</html>
-
-  * Available options for debugging:
-    * To check running containers:
-    * To get the containers internal IP addresses:
-  
-<html>
-  </td>
-  <td>
-</html>
-
-  * Available options for debugging:
-    * ./xpn_docker.sh status
-    * ./xpn_docker.sh network
-
-<html>
+  <code>./xpn_docker.sh status</code>
   </td>
   </tr>
+
+  <tr>
+  <td>  
+  To get the containers internal IP addresses
+  </td>
+  <td>
+  <code>./xpn_docker.sh network</code>
+  </td>
+  </tr>
+ 
  </table>
 </html>
 
 **Please beware of**:
-  * Any modification outside /work will be discarded on container stopping.
-  * Please make a backup of your work "frequently".
+  * Any modification outside the "/work" directory will be discarded on container stopping.
+  * Please make a backup of your work "frequently" (just in case).
   * You might need to use "sudo" before ./xpn_docker.sh if your user doesn't belong to the docker group
-    * could be solved by using "sudo usermod -aG docker ${USER}"
+    * It could be solved by using "sudo usermod -aG docker ${USER}"
 
 
 ## Authors
 * :technologist: Félix García-Carballeira
 * :technologist: Alejandro Calderón Mateos
 * :technologist: Diego Camarmas Alonso
-* :technologist: Elias del Pozo Puñal
 * :technologist: Dario Muñoz Muñoz
+* :technologist: Elias del Pozo Puñal
 

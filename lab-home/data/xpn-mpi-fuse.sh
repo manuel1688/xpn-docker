@@ -4,7 +4,7 @@ set -x
 
 sudo chown lab:lab /shared
 
-# 1) build configuration file /shared/config.xml
+# 1) build configuration file /shared/config.txt
 # 2) start mpi_servers in background
 NL=$(cat /work/machines_mpi | wc -l)
 UID=$(id -u)
@@ -23,7 +23,7 @@ sleep 3
 mpiexec -np 1 \
         -hostfile        /work/machines_mpi \
         -genv XPN_DNS    /shared/dns.txt  \
-        -genv XPN_CONF   /shared/config.xml \
+        -genv XPN_CONF   /shared/config.txt \
         /home/lab/src/xpn/test/integrity/bypass_c/open-write-close /tmp/fuse/test_1 10
 
 # 5) stop mpi_servers

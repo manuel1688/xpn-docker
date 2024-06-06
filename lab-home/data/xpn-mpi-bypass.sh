@@ -8,6 +8,7 @@ sudo chown lab:lab /shared
 # 2) start mpi_servers in background
 NL=$(cat /work/machines_mpi | wc -l)
 /home/lab/src/xpn/scripts/execute/xpn.sh -w /shared -l /work/machines_mpi -x /tmp/ -n $NL start
+sleep 2
 
 # 3) start xpn client
 mpiexec -np 1 \

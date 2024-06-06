@@ -12,7 +12,6 @@ NL=$(cat /work/machines_mpi | wc -l)
 # 3) start xpn client
 mpiexec -np 1 \
         -hostfile        /work/machines_mpi \
-        -genv XPN_DNS    /shared/dns.txt  \
         -genv XPN_CONF   /shared/config.txt \
         /home/lab/src/xpn/test/performance/xpn/open-write-close /xpn/test 10
 

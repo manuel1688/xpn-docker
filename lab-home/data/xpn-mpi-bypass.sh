@@ -12,7 +12,6 @@ NL=$(cat /work/machines_mpi | wc -l)
 # 3) start xpn client
 mpiexec -np 1 \
         -hostfile        /work/machines_mpi \
-        -genv XPN_DNS    /shared/dns.txt  \
         -genv XPN_CONF   /shared/config.txt \
         -genv LD_PRELOAD /home/lab/bin/xpn/lib64/xpn_bypass.so:$LD_PRELOAD \
         /home/lab/src/xpn/test/integrity/bypass_c/open-write-close /tmp/expand/xpn/test_1 10

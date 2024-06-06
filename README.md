@@ -94,7 +94,7 @@ Apache Spark
   </td>
   <td>
    <code>./xpn_docker.sh bash <b>1</b>
-<b>./data/quixote-local.sh</b>
+<b>./spark/quixote-local.sh</b>
 exit</code>
   </td>
   <td>

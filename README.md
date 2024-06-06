@@ -1,21 +1,12 @@
-# XPN on Docker v2.2 (with Ubuntu 22.04 LTS)
+# Ubuntu 22.04 LTS in Docker for Laboratories (v2.2)
 
 ## Contents
 
- * [Getting xpn-docker](https://github.com/acaldero/lab-docker/#getting-xpn-docker)
- * [Some use cases with lab-docker](https://github.com/acaldero/lab-docker/#some-use-cases-with-lab-docker)
- * [Using lab-docker](https://github.com/acaldero/lab-docker/#using-lab-docker)
+ * [Some use cases with xpn-docker](https://github.com/xpn-arcos/xpn-docker/#some-use-cases-with-xpn-docker)
+ * [Using xpn-docker](https://github.com/xpn-arcos/xpn-docker/#using-xpn-docker)
 
 
-## Getting xpn-docker
-
-```
-git clone https://github.com/acaldero/xpn-docker.git
-cd xpn-docker
-./lab.sh build
-```
-
-## Some use cases with lab-docker
+## Some use cases with xpn-docker
 
 <html>
  <table>
@@ -37,9 +28,9 @@ To stop the containers:
 
   <tr>
   <td>
-Expand (native)
+Apache Spark
   </td>
-  <td rowspan="3">
+  <td rowspan="4">
    <pre>
 ./lab.sh start <b>3</b>
 ./lab.sh status
@@ -49,13 +40,27 @@ Expand (native)
    <pre>
 ./lab.sh bash <b>1</b>
 source .profile
-<b>./data/xpn-mpi-native.sh</b>
+<b>./data/quixote-local.sh</b>
 exit
    </pre>
   </td>
-  <td rowspan="3">
+  <td rowspan="4">
    <pre>
 ./lab.sh stop
+   </pre>
+  </td>
+  </tr>
+
+  <tr>
+  <td>
+Expand (native)
+  </td>
+  <td>
+   <pre>
+./lab.sh bash <b>1</b>
+source .profile
+<b>./data/xpn-mpi-native.sh</b>
+exit
    </pre>
   </td>
   </tr>
@@ -102,7 +107,7 @@ exit
   </tr>
 
   <tr>
-  <td> First time + "each time docker/dockerfile is updated"  </td>
+  <td> First time + "each time u22-dockerfile is updated"  </td>
   <td><pre>./lab.sh build</pre>
   </td>
   </tr>
@@ -165,4 +170,5 @@ exit
 * :technologist: Alejandro Calderón Mateos
 * :technologist: Diego Camarmas Alonso (XPN)
 * :technologist: Elias del Pozo Puñal (XPN)
+* :technologist: Dario Muñoz Muñoz (XPN)
 

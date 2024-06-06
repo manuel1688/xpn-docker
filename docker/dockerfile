@@ -31,6 +31,7 @@ COPY scripts/pkg-install/*.sh /tmp/
 COPY scripts/src-install/*.sh /tmp/
  RUN  chmod a+x /tmp/*.sh
  RUN  /tmp/mpich.sh   /home/lab/src/
+#RUN  /tmp/spark.sh   /home/lab/src/
  RUN  /tmp/xpn.sh     /home/lab/src/
  RUN  /tmp/ior.sh     /home/lab/src/
 

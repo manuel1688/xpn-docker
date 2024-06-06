@@ -1,64 +1,31 @@
-# XPN on Docker v2.2 (with Ubuntu 22.04 LTS)
+# Expand Docker (v3.0.0)
 
 ## Contents
 
- * [Getting xpn-docker](https://github.com/acaldero/lab-docker/#getting-xpn-docker)
- * [Some use cases with lab-docker](https://github.com/acaldero/lab-docker/#some-use-cases-with-lab-docker)
- * [Using lab-docker](https://github.com/acaldero/lab-docker/#using-lab-docker)
+ * [Some use cases with xpn-docker](https://github.com/xpn-arcos/xpn-docker/#some-use-cases-with-xpn-docker)
+ * [Using xpn-docker](https://github.com/xpn-arcos/xpn-docker/#using-xpn-docker)
 
 
-## Getting xpn-docker
-
-```
-git clone https://github.com/acaldero/xpn-docker.git
-cd xpn-docker
-./lab.sh build
-```
-
-## Some use cases with lab-docker
+## Some use cases with xpn-docker
 
 <html>
  <table>
 
   <tr>
   <td>
-Example
+Examples
   </td>
   <td>
-To start <b>3</b> containers:
+Step 1: <br> To start <b>3</b> containers
   </td>
   <td>
-Some work from container <b>1</b>:
+Step 2: <br> Some work from container <b>1</b>
   </td>
   <td>
-To stop the containers:
+Step 3: <br> To stop the containers
   </td>
   </tr>
 
-  <tr>
-  <td>
-Expand (native)
-  </td>
-  <td rowspan="3">
-   <pre>
-./lab.sh start <b>3</b>
-./lab.sh status
-   </pre>
-  </td>
-  <td>
-   <pre>
-./lab.sh bash <b>1</b>
-source .profile
-<b>./data/xpn-mpi-native.sh</b>
-exit
-   </pre>
-  </td>
-  <td rowspan="3">
-   <pre>
-./lab.sh stop
-   </pre>
-  </td>
-  </tr>
 
   <tr>
   <td>
@@ -66,13 +33,49 @@ Expand (bypass)
   </td>
   <td>
    <pre>
-./lab.sh bash <b>1</b>
-source .profile
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+   </pre>
+  </td>
+  <td>
+   <pre>
+./xpn_docker.sh bash <b>1</b>
 <b>./data/xpn-mpi-bypass.sh</b>
 exit
    </pre>
   </td>
+  <td>
+   <pre>
+./xpn_docker.sh stop
+   </pre>
+  </td>
   </tr>
+
+  
+  <tr>
+  <td>
+Expand (native)
+  </td>
+  <td>
+   <pre>
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+   </pre>
+  </td>
+  <td>
+   <pre>
+./xpn_docker.sh bash <b>1</b>
+<b>./data/xpn-mpi-native.sh</b>
+exit
+   </pre>
+  </td>
+  <td>
+   <pre>
+./xpn_docker.sh stop
+   </pre>
+  </td>
+  </tr>
+  
 
   <tr>
   <td>
@@ -80,10 +83,45 @@ Expand (fuse)
   </td>
   <td>
    <pre>
-./lab.sh bash <b>1</b>
-source .profile
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+   </pre>
+  </td>
+  <td>
+   <pre>
+./xpn_docker.sh bash <b>1</b>
 <b>./data/xpn-mpi-fuse.sh</b>
 exit
+   </pre>
+  </td>
+  <td>
+   <pre>
+./xpn_docker.sh stop
+   </pre>
+  </td>
+  </tr>
+
+
+  <tr>
+  <td>
+Apache Spark
+  </td>
+  <td>
+   <pre>
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+   </pre>
+  </td>
+  <td>
+   <pre>
+./xpn_docker.sh bash <b>1</b>
+<b>./data/quixote-local.sh</b>
+exit
+   </pre>
+  </td>
+  <td>
+   <pre>
+./xpn_docker.sh stop
    </pre>
   </td>
   </tr>
@@ -102,20 +140,20 @@ exit
   </tr>
 
   <tr>
-  <td> First time + "each time docker/dockerfile is updated"  </td>
-  <td><pre>./lab.sh build</pre>
+  <td> First time + "each time u22-dockerfile is updated"  </td>
+  <td><pre>./xpn_docker.sh build</pre>
   </td>
   </tr>
 
   <tr>
   <td> To start a work session with <b>3</b> containers </td>
-  <td><pre>./lab.sh start <b>3</b></pre>
+  <td><pre>./xpn_docker.sh start <b>3</b></pre>
   </td>
   </tr>
 
   <tr>
   <td> To get into container <b>1</b>  </td>
-  <td><pre> ./lab.sh bash <b>1</b></pre>
+  <td><pre> ./xpn_docker.sh bash <b>1</b></pre>
   </td>
   </tr>
 
@@ -126,7 +164,7 @@ exit
 
   <tr>
   <td>To stop the work session please use  </td>
-  <td><pre>./lab.sh stop</pre>
+  <td><pre>./xpn_docker.sh stop</pre>
   </td>
   </tr>
 
@@ -144,8 +182,8 @@ exit
 </html>
 
   * Available options for debugging:
-    * ./lab.sh status
-    * ./lab.sh network
+    * ./xpn_docker.sh status
+    * ./xpn_docker.sh network
 
 <html>
   </td>
@@ -156,13 +194,14 @@ exit
 **Please beware of**:
   * Any modification outside /work will be discarded on container stopping.
   * Please make a backup of your work "frequently".
-  * You might need to use "sudo" before ./lab.sh if your user doesn't belong to the docker group
+  * You might need to use "sudo" before ./xpn_docker.sh if your user doesn't belong to the docker group
     * could be solved by using "sudo usermod -aG docker ${USER}"
 
 
 ## Authors
 * :technologist: Félix García-Carballeira
 * :technologist: Alejandro Calderón Mateos
-* :technologist: Diego Camarmas Alonso (XPN)
-* :technologist: Elias del Pozo Puñal (XPN)
+* :technologist: Diego Camarmas Alonso
+* :technologist: Elias del Pozo Puñal
+* :technologist: Dario Muñoz Muñoz
 

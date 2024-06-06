@@ -19,12 +19,14 @@ ln   -s mpich-4.1.1  mpich
 
 # 4) Install MPICH (from source code)
 mkdir -p /home/lab/bin
-cd       ${DESTINATION_PATH}/mpich
+
+cd ${DESTINATION_PATH}/mpich
 ./configure --prefix=/home/lab/bin/mpich \
-	    --with-device=ch3:sock \
+	        --with-device=ch3:sock \
             --enable-threads=multiple \
             --enable-romio \
-	    --disable-fortran
+	        --disable-fortran
+
 make -j $(nproc) all
 make install
 sudo ldconfig

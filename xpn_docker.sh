@@ -2,7 +2,7 @@
 #set -x
 
 #
-#  Copyright 2019-2023 Alejandro Calderon Mateos, Felix Garcia Carballeira, Diego Camarmas Alonso, Jose Rivadeneira Lopez-Bravo
+#  Copyright 2019-2024 Alejandro Calderon Mateos, Felix Garcia Carballeira, Diego Camarmas Alonso, Jose Rivadeneira Lopez-Bravo, Dario Muñoz Muñoz
 #
 #  This file is part of XPN-Docker proyect.
 #
@@ -21,48 +21,22 @@
 #
 
 
-lab_welcome ()
+xpn_docker_welcome ()
 {
 	echo ""
-	echo "  XPN-Docker with ubuntu 22.04 (v2.2) "
-	echo " -------------------------------------"
+	echo "  XPN-Docker (v3.0.0)"
+	echo " ---------------------"
 	echo ""
 }
 
-lab_help_b ()
-{
-	echo "  Usage: $0 <action> [<options>]"
-	echo ""
-	echo "  : First time, and each time docker/dockerfile is updated, please execute:"
-	echo "          $0 build"
-	echo ""
-	echo "  : A typical work session has 3 steps:"
-	echo "    1) First, please start the work session with:"
-	echo "          $0 start <number of containers>"
-	echo "          $0 status"
-	echo "    2) Then you can...:"
-	echo "       2.1) ...work in a single container:"
-	echo "          $0 bash <container id, from 1 to number_of_containers>"
-	echo "          <some work within container>"
-	echo "          exit"
-	echo "       2.1) ...work on all containers:"
-	echo "          $0 mpirun 2 \"<command>\""
-	echo "    3) Lastly, please stop the work session with:"
-	echo "          $0 stop"
-	echo ""
-	echo "  : Available option to uninstall lab-docker (remove images + containers):"
-	echo "          $0 cleanup"
-	echo ""
-}
-
-lab_help_c ()
+xpn_docker_help_c ()
 {
 	echo "  Usage: $0 <action> [<options>]"
 	echo ""
 	echo "  :: First time + each time docker/dockerfile is updated, please execute:"
 	echo "        $0 build"
 	echo ""
-	echo "  :: Working with lab-docker:"
+	echo "  :: Working with xpn-docker:"
 	echo "     1) Starting the containers:"
 	echo "        $0 start <number of containers>"
 	echo ""
@@ -76,13 +50,13 @@ lab_help_c ()
 	echo "     3) Stopping the containers:"
 	echo "        $0 stop"
 	echo ""
-	echo "  :: Available option to uninstall lab-docker (remove images + containers):"
+	echo "  :: Available option to uninstall xpn-docker (remove images + containers):"
 	echo "        $0 cleanup"
 	echo ""
 }
 
 
-lab_machines_create ()
+xpn_docker_machines_create ()
 {
 	# Container cluster (single node) machine list
 	CONTAINER_ID_LIST=$(docker ps -f name=node -q)
@@ -102,7 +76,7 @@ lab_machines_create ()
 	mkdir -p export/nfs
 }
 
-lab_machines_remove ()
+xpn_docker_machines_remove ()
 {
 	rm -fr machines_mpi
 	rm -fr machines_hosts
@@ -118,8 +92,8 @@ lab_machines_remove ()
 
 # Usage
 if [ $# -eq 0 ]; then
-	lab_welcome
-	lab_help_c
+	xpn_docker_welcome
+	xpn_docker_help_c
 	exit
 fi
 
@@ -131,11 +105,11 @@ fi
 docker -v >& /dev/null
 status=$?
 if [ $status -ne 0 ]; then
-     echo ": docker is not found in this computer."
-     echo ": * Did you install docker?."
-     echo ":   Please visit https://docs.docker.com/get-docker/"
-     echo ""
-     exit
+    echo ": docker is not found in this computer."
+    echo ": * Did you install docker?."
+    echo ":   Please visit https://docs.docker.com/get-docker/"
+    echo ""
+    exit
 fi
 
 
@@ -143,18 +117,18 @@ fi
 # for each argument, try to execute it
 #
 
-DOCKER_PREFIX_NAME=docker
+DOCKER_PREFIX_NAME=xpn-docker
 mkdir -p export
 
 while (( "$#" ))
 do
 	arg_i=$1
 	case $arg_i in
-	     build)
+	    build)
 		# Check params
 		if [ ! -f docker/dockerfile ]; then
 		    echo ": The docker/dockerfile file is not found."
-		    echo ": * Did you execute git clone https://github.com/acaldero/lab-docker.git?."
+		    echo ": * Did you execute git clone https://github.com/xpn-arcos/xpn-docker.git?."
 		    echo ""
 		    exit
 		fi
@@ -163,91 +137,108 @@ do
 		echo "Building initial image..."
 		HOST_UID=$(id -u)
 		HOST_GID=1000
-		docker image build -t u22 --build-arg UID=$HOST_UID --build-arg GID=$HOST_GID -f docker/dockerfile .
-	     ;;
+		# docker image build -t dariomnz/base-xpn-docker --build-arg UID=$HOST_UID --build-arg GID=$HOST_GID -f docker/base/dockerfile .
+		docker image build -t xpn-docker --build-arg UID=$HOST_UID --build-arg GID=$HOST_GID -f docker/dockerfile .
+	    ;;
 
-	     start)
+	    start)
 		shift
 
 		# Start container cluster (single node)
 		echo "Building containers..."
-		HOST_UID=$(id -u) HOST_GID=1000 docker-compose -f docker/dockercompose.yml up -d --scale node=$1
+		HOST_UID=$(id -u) HOST_GID=1000 docker-compose -f docker/dockercompose.yml -p $DOCKER_PREFIX_NAME up -d --scale node=$1
 		if [ $? -gt 0 ]; then
 		    echo ": The docker-compose command failed to spin up containers."
-		    echo ": * Did you execute git clone https://github.com/acaldero/lab-docker.git?."
+		    echo ": * Did you execute git clone https://github.com/xpn-arcos/xpn-docker.git?."
 		    echo ""
 		    exit
 		fi
 
 		# Containers machine file
-		lab_machines_create
+		xpn_docker_machines_create
 
 		# Update /etc/hosts on each node
-		CONTAINER_ID_LIST=$(docker ps -f name=docker -q)
+		CONTAINER_ID_LIST=$(docker ps -f name=xpn-docker -q)
 		for C in $CONTAINER_ID_LIST; do
 		    docker container exec -it $C /work/lab-home/bin/hosts_update.sh
 		done
-	     ;;
+	    ;;
 
-	     bash)
-                shift
+	    bash)
+        shift
 
 		# Check params
-                CO_ID=$1
+        CO_ID=$1
 		CO_NC=$(docker ps -f name=$DOCKER_PREFIX_NAME -q | wc -l)
-                if [ $CO_ID -lt 1 ]; then
+		if [ $CO_ID -lt 1 ]; then
 			echo "ERROR: Container ID $CO_ID out of range (1...$CO_NC)"
-                	shift
-                        continue
-                fi
-                if [ $CO_ID -gt $CO_NC ]; then
+			shift
+			continue
+		fi
+		if [ $CO_ID -gt $CO_NC ]; then
 			echo "ERROR: Container ID $CO_ID out of range (1...$CO_NC)"
-                	shift
-                        continue
-                fi
+			shift
+			continue
+		fi
 
 		# Bash on container...
-		echo "Executing /bin/bash on container $CO_ID..."
+		echo "Executing /bin/bash on containeradf $CO_ID..."
 		CO_NAME=$(docker ps -f name=$DOCKER_PREFIX_NAME -q | head -$CO_ID | tail -1)
-		docker exec -it --user lab $CO_NAME /bin/bash
-	     ;;
+		echo "Coname $CO_NAME"
+		docker exec -it --user lab $CO_NAME /bin/bash -l
+	    ;;
 
-	     stop)
+	    stop)
 		# Stopping containers
 		echo "Stopping containers..."
-		HOST_UID=$(id -u) HOST_GID=1000 docker-compose -f docker/dockercompose.yml down
+		HOST_UID=$(id -u) HOST_GID=1000 docker-compose -f docker/dockercompose.yml -p $DOCKER_PREFIX_NAME down
 		if [ $? -gt 0 ]; then
 		    echo ": The docker-compose command failed to stop containers."
-		    echo ": * Did you execute git clone https://github.com/acaldero/lab-docker.git?."
+		    echo ": * Did you execute git clone https://github.com/xpn-arcos/xpn-docker.git?."
 		    echo ""
 		    exit
 		fi
 
 		# Remove container cluster (single node) files...
-		lab_machines_remove
-	     ;;
+		xpn_docker_machines_remove
+	    ;;
+		 
+	    kill)
+		# Stopping containers
+		echo "Stopping containers..."
+		HOST_UID=$(id -u) HOST_GID=1000 docker-compose -f docker/dockercompose.yml -p $DOCKER_PREFIX_NAME kill
+		if [ $? -gt 0 ]; then
+		    echo ": The docker-compose command failed to stop containers."
+		    echo ": * Did you execute git clone https://github.com/xpn-arcos/xpn-docker.git?."
+		    echo ""
+		    exit
+		fi
 
-	     status)
+		# Remove container cluster (single node) files...
+		xpn_docker_machines_remove
+	    ;;
+
+	    status)
 		echo "Show status of current containers..."
 		docker ps
-	     ;;
+	    ;;
 
-	     network)
+	    network)
 		echo "Show status of current IPs..."
 		CONTAINER_ID_LIST=$(docker ps -f name=$DOCKER_PREFIX_NAME -q)
 		docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $CONTAINER_ID_LIST
-	     ;;
+	    ;;
 
-	     cleanup)
+	    cleanup)
 		# Removing everything (warning) 
 		echo "Removing containers and images..."
                 docker rm      -f $(docker ps     -a -q)
                 docker rmi     -f $(docker images -a -q)
                 docker volume rm  $(docker volume ls -q)
                 docker network rm $(docker network ls|tail -n+2|awk '{if($2 !~ /bridge|none|host/){ print $1 }}')
-	     ;;
+	    ;;
 
-	     mpirun)
+	    mpirun)
 		# Get parameters
 		shift
 		NP=$1
@@ -272,19 +263,19 @@ do
 		# U22
 		docker container exec -it $CNAME     \
 		       mpirun -np $NP -machinefile machines_mpi \
-			      $A
-	     ;;
+			   $A
+	    ;;
 
-	     help)
-		lab_welcome
-		lab_help_c
-	     ;;
+	    help)
+		xpn_docker_welcome
+		xpn_docker_help_c
+	    ;;
 
-	     *)
+	    *)
 		echo ""
 		echo "Unknow command: $1"
-                $0 help
-	     ;;
+        $0 help
+	    ;;
 	esac
 
 	shift

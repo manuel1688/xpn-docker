@@ -44,7 +44,6 @@ run_test(){
     # 3) start xpn client
     mpiexec -np 1 \
             -hostfile        /work/machines_mpi \
-            -genv XPN_DNS    /shared/dns.txt  \
             -genv XPN_CONF   /shared/config.xml \
             -wdir /home/lab/src/xpn/test/performance/xpn-fault-tolerant \
             /home/lab/src/xpn/test/performance/xpn-fault-tolerant/$test_file /xpn/test $mb $buffer $type $n_server_error \

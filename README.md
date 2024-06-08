@@ -8,97 +8,115 @@
 
 ## Some use cases with xpn-docker
 
+* Examples using Ad-Hoc XPN:
+
 <html>
  <table>
-
-  <tr>
-  <td>
-Examples
-  </td>
-  <td>
-Step 1: <br> To start <b>3</b> containers
-  </td>
-  <td>
-Step 2: <br> Some work from container <b>1</b>
-  </td>
-  <td>
-Step 3: <br> To stop the containers
-  </td>
-  </tr>
-
-
-  <tr>
-  <td>
-Expand (bypass)
-  </td>
-  <td>
-   <code>./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status</code>
-  </td>
-  <td>
-   <code>./xpn_docker.sh bash <b>1</b>
-<b>./data/xpn-mpi-bypass.sh</b>
-exit</code>
-  </td>
-  <td>
-   <code>./xpn_docker.sh stop</code>
-  </td>
-  </tr>
-
-  
-  <tr>
-  <td>
-Expand (native)
-  </td>
-  <td>
-   <code>./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status</code>
-  </td>
-  <td>
-   <code>./xpn_docker.sh bash <b>1</b>
-<b>./data/xpn-mpi-native.sh</b>
-exit</code>
-  </td>
-  <td>
-  <code>./xpn_docker.sh stop</code>
-  </td>
-  </tr>
-  
 
   <tr>
   <td>
 Expand (fuse)
   </td>
   <td>
-   <code>./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status</code>
+Expand (bypass)
   </td>
   <td>
-   <code>./xpn_docker.sh bash <b>1</b>
-<b>./data/xpn-mpi-fuse.sh</b>
-exit</code>
-  </td>
-  <td>
-   <code>./xpn_docker.sh stop</code>
+Expand (native)
   </td>
   </tr>
 
+  <tr>
+  <td>
+<pre>
+: 1. To start <b>3</b> containers
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+<br>
+: 2. Work from container <b>1</b>
+./xpn_docker.sh bash <b>1</b>
+<b>./data/xpn-mpi-fuse.sh</b>
+exit
+<br>
+: 3. Stop all containers
+./xpn_docker.sh stop
+</pre>
+  </td>
+  <td>
+<pre>
+: 1. Spin up <b>3</b> containers
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+<br>
+: 2. Work from container <b>1</b>
+./xpn_docker.sh bash <b>1</b>
+<b>./data/xpn-mpi-bypass.sh</b>
+exit
+<br>
+: 3. Stop all containers
+./xpn_docker.sh stop
+</pre>
+  </td>
+  <td>
+<pre>
+: 1. Spin up <b>3</b> containers
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+<br>
+: 2. Work from container <b>1</b>
+./xpn_docker.sh bash <b>1</b>
+<b>./data/xpn-mpi-native.sh</b>
+exit
+<br>
+: 3. Stop all containers
+./xpn_docker.sh stop
+</pre>
+  </td>
+  </tr>
+
+ </table>
+</html>
+
+
+* Examples of benchmarks with Ad-Hoc XPN:
+
+<html>
+ <table>
 
   <tr>
   <td>
 Apache Spark
   </td>
   <td>
-   <code>./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status   </code>
+MDtest
   </td>
   <td>
-   <code>./xpn_docker.sh bash <b>1</b>
+IOR
+  </td>
+  </tr>
+
+  <tr>
+  <td>
+<pre>
+: 1. To start <b>3</b> containers
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+<br>
+: 2. Work from container <b>1</b>
+./xpn_docker.sh bash <b>1</b>
 <b>./spark/quixote-local.sh</b>
-exit</code>
+exit
+<br>
+: 3. Stop all containers
+./xpn_docker.sh stop
+</pre>
   </td>
   <td>
-   <code>./xpn_docker.sh stop</code>
+<pre>
+</pre>
+  </td>
+  <td>
+<pre>
+</pre>
   </td>
   </tr>
 

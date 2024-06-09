@@ -117,9 +117,8 @@ exit
 ./xpn_docker.sh status
 <br>
 : 2. Work from container <b>1</b>
-./xpn_docker.sh bash <b>1</b>
-<b>./benchmark/xpn-mpi-mdtest.sh</b>
-exit
+./xpn_docker.sh exec 1 \
+ <b>./benchmark/xpn-mpi-mdtest.sh</b>
 <br>
 : 3. Stop all containers
 ./xpn_docker.sh stop
@@ -132,9 +131,8 @@ exit
 ./xpn_docker.sh status
 <br>
 : 2. Work from container <b>1</b>
-./xpn_docker.sh bash <b>1</b>
-<b>./benchmark/xpn-mpi-ior.sh</b>
-exit
+./xpn_docker.sh exec 1 \
+ <b>./benchmark/xpn-mpi-ior.sh</b>
 <br>
 : 3. Stop all containers
 ./xpn_docker.sh stop

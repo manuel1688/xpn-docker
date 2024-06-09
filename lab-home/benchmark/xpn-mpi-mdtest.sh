@@ -4,7 +4,7 @@ set -x
 
 sudo chown lab:lab /shared
 
-export XPN_CONF=/shared/config.xml
+export XPN_CONF=/shared/config.txt
 export XPN_LOCALITY=1
 SERVER_TYPE=mpi
 # SERVER_TYPE=sck
@@ -15,7 +15,7 @@ SERVER_TYPE=mpi
 
 sleep 1
 
-# 1) build configuration file /shared/config.xml
+# 1) build configuration file /shared/config.txt
 # 2) start mpi_servers in background
 NL=$(cat /work/machines_mpi | wc -l)
 
@@ -25,9 +25,9 @@ sleep 2
 # 3) start xpn client
 mpiexec -l -np $NL \
         -hostfile        /work/machines_mpi \
-        -genv XPN_CONF   /shared/config.xml \
+        -genv XPN_CONF   /shared/config.txt \
         -genv LD_PRELOAD /home/lab/bin/xpn/lib64/xpn_bypass.so:$LD_PRELOAD \
-        /home/lab/src/ior/bin/mdtest -d /tmp/expand/xpn -I 5 -z 1 -b 2 -u -e 100k -w 200k
+        /home/lab/bin/ior/bin/mdtest -d /tmp/expand/xpn -I 5 -z 1 -b 2 -u -e 100k -w 200k
 
 # ls -rlash /tmp
 # netstat -tlnp

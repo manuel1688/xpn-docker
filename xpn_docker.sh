@@ -40,12 +40,14 @@ xpn_docker_help_c ()
         echo "     1) Starting the containers:"
         echo "        $0 start <number of containers>"
         echo ""
-        echo "     2.a) To work in a single container:"
+        echo "     2.a) To work within a single container:"
         echo "            $0 bash <container id, from 1 to number_of_containers>"
         echo "            <some work...>"
         echo "            exit"
-        echo "     2.b) To execute \"command\" on all containers:"
-        echo "            $0 mpirun 2 \"<command>\""
+        echo "     2.b) To execute \"command\" on <number of containers> containers:"
+        echo "            $0 mpirun <number of containers> \"<command>\""
+        echo "     2.c) To work on a single container:"
+        echo "            $0 exec <container id, from 1 to number_of_containers> \"<command>\""
         echo ""
         echo "     3) Stopping the containers:"
         echo "        $0 stop"
@@ -263,6 +265,31 @@ do
                 docker container exec -it $CNAME     \
                        mpirun -np $NP -machinefile machines_mpi \
                        $A
+             ;;
+
+	     exec)
+                # Get parameters
+                shift
+                CO_ID=$1
+                shift
+                A=$@
+                shift
+                CO_NC=$(docker ps -f name=$DOCKER_PREFIX_NAME -q | wc -l)
+
+                # Check params
+                if [ $CO_ID -lt 1 ]; then
+                   echo "ERROR: Container ID $CO_ID out of range (1...$CO_NC)"
+                   continue
+                fi
+                if [ $CO_ID -gt $CO_NC ]; then
+                   echo "ERROR: Container ID $CO_ID out of range (1...$CO_NC)"
+                   continue
+                fi
+
+                # Bash on container...
+                echo "Executing $A on container $CO_ID..."
+                CO_NAME=$(docker ps -f name=$DOCKER_PREFIX_NAME -q | head -$CO_ID | tail -1)
+                docker exec -it --user lab $CO_NAME bash -lc "source .profile; $A"
              ;;
 
              help)

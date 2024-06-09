@@ -29,13 +29,9 @@ mpiexec -l -np $NL \
         -genv LD_PRELOAD /home/lab/bin/xpn/lib64/xpn_bypass.so:$LD_PRELOAD \
         /home/lab/bin/ior/bin/mdtest -d /tmp/expand/xpn -I 5 -z 1 -b 2 -u -e 100k -w 200k
 
-# ls -rlash /tmp
-# netstat -tlnp
-
 # 4) stop mpi_servers
 /home/lab/src/xpn/scripts/execute/xpn.sh -e $SERVER_TYPE -w /shared -d /work/machines_mpi stop
-sleep 5
+sleep 2
 
-netstat -tlnp
 pkill mpiexec
 

@@ -1,5 +1,6 @@
 # Expand Docker (v3.0.0)
 
+
 ## Contents
 
  * [Some use cases with xpn-docker](https://github.com/xpn-arcos/xpn-docker/#some-use-cases-with-xpn-docker)
@@ -83,13 +84,56 @@ exit
  <table>
   <tr>
   <td>
-Apache Spark
-  </td>
-  <td>
 MDtest
+<img width="325" height="1">
   </td>
   <td>
 IOR
+<img width="325" height="1">
+  </td>
+  </tr>
+  <tr>
+  <td>
+<pre>
+: 1. To start <b>3</b> containers,
+: 2. sleep 5 seconds,
+: 3. work from container <b>1</b>,
+: 4. and stop all containers
+<br>
+./xpn_docker.sh \
+    start <b>3</b> \
+    sleep <b>5</b> \
+    exec <b>1</b> "./test/xpn-mpi-mdtest.sh" \
+    stop
+</pre>
+  </td>
+  <td>
+<pre>
+: 1. To start <b>3</b> containers,
+: 2. sleep 5 seconds,
+: 3. work from container <b>1</b>,
+: 4. and stop all containers
+<br>
+./xpn_docker.sh \
+    start <b>3</b> \
+    sleep <b>5</b> \
+    exec <b>1</b> "./test/xpn-mpi-ior.sh" \
+    stop
+</pre>
+  </td>
+  </tr>
+ </table>
+</html>
+
+
+* Examples of Ad-Hoc XPN with Apache Spark:
+
+<html>
+ <table>
+  <tr>
+  <td>
+Apache Spark
+<img width="650" height="1">
   </td>
   </tr>
   <tr>
@@ -100,43 +144,11 @@ IOR
 ./xpn_docker.sh sleep 5
 <br>
 : 2. Work from container <b>1</b>
-./xpn_docker.sh \
-   exec <b>1</b> \
-   <b>./spark/quixote-local.sh</b>
-./xpn_docker.sh \
-   exec <b>1</b> \
-   <b>./spark/quixote-xpn.sh</b>
+./xpn_docker.sh exec <b>1</b> <b>./spark/quixote-local.sh</b>
+./xpn_docker.sh exec <b>1</b> <b>./spark/quixote-xpn.sh</b>
 <br>
 : 3. Stop all containers
 ./xpn_docker.sh stop
-</pre>
-  </td>
-  <td>
-<pre>
-: 1. To start <b>3</b> containers,
-: 2. sleep 5 seconds,
-: 3. work from container <b>1</b>,
-: 4. and stop all containers
-<br>
-./xpn_docker.sh \
-  start <b>3</b> \
-  sleep <b>5</b> \
-  exec <b>1</b> "./test/xpn-mpi-mdtest.sh" \
-  stop
-</pre>
-  </td>
-  <td>
-<pre>
-: 1. To start <b>3</b> containers,
-: 2. sleep 5 seconds,
-: 3. work from container <b>1</b>,
-: 4. and stop all containers
-<br>
-./xpn_docker.sh \
-  start <b>3</b> \
-  sleep <b>5</b> \
-  exec <b>1</b> "./test/xpn-mpi-ior.sh" \
-  stop
 </pre>
   </td>
   </tr>

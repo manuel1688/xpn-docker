@@ -70,8 +70,8 @@ xpn_docker_machines_create ()
         I=1
         while IFS= read -r line
         do
-          echo       "nodo$I" >> machines_hosts
-          echo "$line nodo$I" >> etc_hosts
+          echo       "node$I" >> machines_hosts
+          echo "$line node$I" >> etc_hosts
           I=$((I+1))
         done < machines_mpi
 
@@ -272,7 +272,7 @@ do
                 shift
                 CO_ID=$1
                 shift
-                A=$@
+                A=$1
                 shift
                 CO_NC=$(docker ps -f name=$DOCKER_PREFIX_NAME -q | wc -l)
 

@@ -103,7 +103,7 @@ IOR
 ./xpn_docker.sh \
     start <b>3</b> \
     sleep <b>5</b> \
-    exec <b>1</b> "./test/xpn-mpi-mdtest.sh" \
+    exec <b>1</b> "./benchmark/xpn-mpi-mdtest.sh" \
     stop
 </pre>
   </td>
@@ -117,7 +117,7 @@ IOR
 ./xpn_docker.sh \
     start <b>3</b> \
     sleep <b>5</b> \
-    exec <b>1</b> "./test/xpn-mpi-ior.sh" \
+    exec <b>1</b> "./benchmark/xpn-mpi-ior.sh" \
     stop
 </pre>
   </td>

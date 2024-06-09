@@ -34,7 +34,7 @@ Expand (native)
 <br>
 : 2. Work from container <b>1</b>
 ./xpn_docker.sh bash <b>1</b>
-<b>./data/xpn-mpi-fuse.sh</b>
+<b>./test/xpn-mpi-fuse.sh</b>
 exit
 <br>
 : 3. Stop all containers
@@ -49,7 +49,7 @@ exit
 <br>
 : 2. Work from container <b>1</b>
 ./xpn_docker.sh bash <b>1</b>
-<b>./data/xpn-mpi-bypass.sh</b>
+<b>./test/xpn-mpi-bypass.sh</b>
 exit
 <br>
 : 3. Stop all containers
@@ -64,7 +64,7 @@ exit
 <br>
 : 2. Work from container <b>1</b>
 ./xpn_docker.sh bash <b>1</b>
-<b>./data/xpn-mpi-native.sh</b>
+<b>./test/xpn-mpi-native.sh</b>
 exit
 <br>
 : 3. Stop all containers
@@ -112,10 +112,32 @@ exit
   </td>
   <td>
 <pre>
+: 1. To start <b>3</b> containers
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+<br>
+: 2. Work from container <b>1</b>
+./xpn_docker.sh bash <b>1</b>
+<b>./benchmark/xpn-mpi-mdtest.sh</b>
+exit
+<br>
+: 3. Stop all containers
+./xpn_docker.sh stop
 </pre>
   </td>
   <td>
 <pre>
+: 1. To start <b>3</b> containers
+./xpn_docker.sh start <b>3</b>
+./xpn_docker.sh status
+<br>
+: 2. Work from container <b>1</b>
+./xpn_docker.sh bash <b>1</b>
+<b>./benchmark/xpn-mpi-ior.sh</b>
+exit
+<br>
+: 3. Stop all containers
+./xpn_docker.sh stop
 </pre>
   </td>
   </tr>

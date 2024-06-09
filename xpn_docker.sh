@@ -143,11 +143,13 @@ do
              ;;
 
              start)
+                # Get parameters
                 shift
+                NP=$1
 
                 # Start container cluster (single node)
                 echo "Building containers..."
-                HOST_UID=$(id -u) HOST_GID=1000 docker-compose -f docker/dockercompose.yml -p $DOCKER_PREFIX_NAME up -d --scale node=$1
+                HOST_UID=$(id -u) HOST_GID=1000 docker-compose -f docker/dockercompose.yml -p $DOCKER_PREFIX_NAME up -d --scale node=$NP
                 if [ $? -gt 0 ]; then
                     echo ": The docker-compose command failed to spin up containers."
                     echo ": * Did you execute git clone https://github.com/xpn-arcos/xpn-docker.git?."
@@ -166,11 +168,12 @@ do
              ;;
 
              bash)
+                # Get parameters
                 shift
-
-                # Check params
                 CO_ID=$1
                 CO_NC=$(docker ps -f name=$DOCKER_PREFIX_NAME -q | wc -l)
+
+                # Check params
                 if [ $CO_ID -lt 1 ]; then
                         echo "ERROR: Container ID $CO_ID out of range (1...$CO_NC)"
                         shift
@@ -273,7 +276,6 @@ do
                 CO_ID=$1
                 shift
                 A=$1
-                shift
                 CO_NC=$(docker ps -f name=$DOCKER_PREFIX_NAME -q | wc -l)
 
                 # Check params
@@ -295,6 +297,16 @@ do
              help)
                 xpn_docker_welcome
                 xpn_docker_help_c
+             ;;
+
+             sleep)
+                # Get parameters
+                shift
+                NP=$1
+
+		# Sleep...
+                echo "Sleeping $NP seconds..."
+		sleep ${NP}
              ;;
 
              *)

@@ -81,7 +81,6 @@ exit
 
 <html>
  <table>
-
   <tr>
   <td>
 Apache Spark
@@ -93,18 +92,20 @@ MDtest
 IOR
   </td>
   </tr>
-
   <tr>
   <td>
 <pre>
 : 1. To start <b>3</b> containers
 ./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status
+./xpn_docker.sh sleep 5
 <br>
 : 2. Work from container <b>1</b>
-./xpn_docker.sh bash <b>1</b>
-<b>./spark/quixote-local.sh</b>
-exit
+./xpn_docker.sh \
+   exec <b>1</b> \
+   <b>./spark/quixote-local.sh</b>
+./xpn_docker.sh \
+   exec <b>1</b> \
+   <b>./spark/quixote-xpn.sh</b>
 <br>
 : 3. Stop all containers
 ./xpn_docker.sh stop
@@ -112,34 +113,33 @@ exit
   </td>
   <td>
 <pre>
-: 1. To start <b>3</b> containers
-./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status
+: 1. To start <b>3</b> containers,
+: 2. sleep 5 seconds,
+: 3. work from container <b>1</b>,
+: 4. and stop all containers
 <br>
-: 2. Work from container <b>1</b>
-./xpn_docker.sh exec 1 \
- <b>./benchmark/xpn-mpi-mdtest.sh</b>
-<br>
-: 3. Stop all containers
-./xpn_docker.sh stop
+./xpn_docker.sh \
+  start <b>3</b> \
+  sleep <b>5</b> \
+  exec <b>1</b> "./test/xpn-mpi-mdtest.sh" \
+  stop
 </pre>
   </td>
   <td>
 <pre>
-: 1. To start <b>3</b> containers
-./xpn_docker.sh start <b>3</b>
-./xpn_docker.sh status
+: 1. To start <b>3</b> containers,
+: 2. sleep 5 seconds,
+: 3. work from container <b>1</b>,
+: 4. and stop all containers
 <br>
-: 2. Work from container <b>1</b>
-./xpn_docker.sh exec 1 \
- <b>./benchmark/xpn-mpi-ior.sh</b>
-<br>
-: 3. Stop all containers
-./xpn_docker.sh stop
+./xpn_docker.sh \
+  start <b>3</b> \
+  sleep <b>5</b> \
+  exec <b>1</b> "./test/xpn-mpi-ior.sh" \
+  stop
 </pre>
   </td>
   </tr>
-
  </table>
 </html>
 
@@ -222,4 +222,5 @@ exit
 * :technologist: Diego Camarmas Alonso
 * :technologist: Dario Muñoz Muñoz
 * :technologist: Elias del Pozo Puñal
+
 

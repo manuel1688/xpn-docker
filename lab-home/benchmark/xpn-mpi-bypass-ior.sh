@@ -28,13 +28,13 @@ sleep 2
 mpiexec -l -np 1 \
         -hostfile        /work/machines_mpi \
         -genv XPN_CONF   /shared/config.txt \
-        -genv LD_PRELOAD /home/lab/bin/xpn/lib64/xpn_bypass.so:$LD_PRELOAD \
+        -genv LD_PRELOAD /home/lab/bin/xpn/lib/xpn_bypass.so:$LD_PRELOAD \
         /home/lab/bin/ior/bin/ior -w -r -o /tmp/expand/xpn/iortest1 -t 100k -b 100k -s 1000 -i 1 -d 2 
 
 mpiexec -l -np $NL \
         -hostfile        /work/machines_mpi \
         -genv XPN_CONF   /shared/config.txt \
-        -genv LD_PRELOAD /home/lab/bin/xpn/lib64/xpn_bypass.so:$LD_PRELOAD \
+        -genv LD_PRELOAD /home/lab/bin/xpn/lib/xpn_bypass.so:$LD_PRELOAD \
         /home/lab/bin/ior/bin/mdtest -d /tmp/expand/xpn -I 5 -z 1 -b 2 -u -e 100k -w 200k
 
 # 4) stop mpi_servers

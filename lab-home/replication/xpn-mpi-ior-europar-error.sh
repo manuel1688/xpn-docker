@@ -31,7 +31,7 @@ sleep 2
 mpiexec -l -np $NL \
         -hostfile        /work/machines_mpi \
         -genv XPN_CONF   /shared/config.xml \
-        -genv LD_PRELOAD /home/lab/bin/xpn/lib64/xpn_bypass.so:$LD_PRELOAD \
+        -genv LD_PRELOAD /home/lab/bin/xpn/lib/xpn_bypass.so:$LD_PRELOAD \
         /home/lab/src/ior/bin/ior -w -r -o /tmp/expand/xpn/iortest1 -t 512k -b 1g -s 1 -i 2 -d 2
 
 # ls -rlash /tmp

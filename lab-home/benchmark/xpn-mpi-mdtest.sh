@@ -26,7 +26,7 @@ sleep 2
 mpiexec -l -np $NL \
         -hostfile        /work/machines_mpi \
         -genv XPN_CONF   /shared/config.txt \
-        -genv LD_PRELOAD /home/lab/bin/xpn/lib64/xpn_bypass.so:$LD_PRELOAD \
+        -genv LD_PRELOAD /home/lab/bin/xpn/lib/xpn_bypass.so:$LD_PRELOAD \
         /home/lab/bin/ior/bin/mdtest -d /tmp/expand/xpn -I 5 -z 1 -b 2 -u -e 100k -w 200k
 
 # 4) stop mpi_servers

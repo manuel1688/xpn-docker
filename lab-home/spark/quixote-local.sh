@@ -38,7 +38,7 @@ rm -fr /home/lab/spark/2000-wc
 # spark cluster
 /home/lab/src/spark/sbin/start-all.sh
 sleep 2
-spark-submit /home/lab/spark/quixote.py --master "spark://nodo1:7077" --minput "/home/lab/spark/2000-0.txt" --moutput "/home/lab/spark/2000-wc"
+spark-submit /home/lab/spark/quixote.py --master "spark://node1:7077" --minput "/home/lab/spark/2000-0.txt" --moutput "/home/lab/spark/2000-wc"
 sleep 2
 /home/lab/src/spark/sbin/stop-all.sh
 

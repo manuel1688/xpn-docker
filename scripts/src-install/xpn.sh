@@ -31,10 +31,16 @@ make -j $(nproc) all
 cd ${DESTINATION_PATH}/xpn/
 make install
 
+cd /home/lab/src/xpn/src/xpn_syscall_intercept
+git clone https://github.com/pmem/syscall_intercept.git
+sudo apt install clang -y
+sudo apt-get install -y pkg-config libcapstone-dev
+cmake syscall_intercept -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang
+make
+sudo make install
+
 #Intercept (Manuel)
 cd /home/lab/src/xpn/src/xpn_syscall_intercept
 bash makefile_scripts.sh
 cd /home/lab/src/xpn/test/integrity/test_xpn_syscall
 make
-
-

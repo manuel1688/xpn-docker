@@ -1,5 +1,6 @@
 #!/bin/bash
 set -x
+cd /home/lab/src/xpn/src/xpn_syscall_intercept
 git clone https://github.com/pmem/syscall_intercept.git
 sudo apt install clang 
 sudo apt-get install pkg-config libcapstone-dev
